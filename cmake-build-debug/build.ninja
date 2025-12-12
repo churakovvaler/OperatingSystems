@@ -55,6 +55,12 @@ build CMakeFiles/OS.dir/laba1.c.obj: C_COMPILER__OS_unscanned_Debug C$:/Users/ch
   OBJECT_DIR = CMakeFiles\OS.dir
   OBJECT_FILE_DIR = CMakeFiles\OS.dir
 
+build CMakeFiles/OS.dir/laba2.c.obj: C_COMPILER__OS_unscanned_Debug C$:/Users/chura/OneDrive/Рабочий$ стол/OS/laba2.c || cmake_object_order_depends_target_OS
+  DEP_FILE = CMakeFiles\OS.dir\laba2.c.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\OS.dir
+  OBJECT_FILE_DIR = CMakeFiles\OS.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target OS
@@ -63,7 +69,7 @@ build CMakeFiles/OS.dir/laba1.c.obj: C_COMPILER__OS_unscanned_Debug C$:/Users/ch
 #############################################
 # Link the executable OS.exe
 
-build OS.exe: C_EXECUTABLE_LINKER__OS_Debug CMakeFiles/OS.dir/laba1.c.obj
+build OS.exe: C_EXECUTABLE_LINKER__OS_Debug CMakeFiles/OS.dir/laba1.c.obj CMakeFiles/OS.dir/laba2.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\OS.dir

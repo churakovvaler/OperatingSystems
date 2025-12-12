@@ -1,0 +1,4 @@
+/usr/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "Unix Makefiles" -S "/mnt/c/Users/chura/OneDrive/Рабочий стол/OS" -B "/mnt/c/Users/chura/OneDrive/Рабочий стол/OS/cmake-build-debug-wsl"
+-- Configuring done (0.1s)
+-- Generating done (0.3s)
+-- Build files have been written to: /mnt/c/Users/chura/OneDrive/Рабочий стол/OS/cmake-build-debug-wsl

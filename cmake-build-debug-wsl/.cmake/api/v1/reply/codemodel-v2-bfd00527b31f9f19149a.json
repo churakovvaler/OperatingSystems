@@ -6,10 +6,10 @@
 			[
 				{
 					"build" : ".",
-					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
 					"minimumCMakeVersion" : 
 					{
-						"string" : "3.30"
+						"string" : "3.10"
 					},
 					"projectIndex" : 0,
 					"source" : ".",
@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "OS::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-OS-Debug-6f666c3311f70ae357e1.json",
+					"jsonFile" : "target-OS-Debug-6986e4d16c9b516666d9.json",
 					"name" : "OS",
 					"projectIndex" : 0
 				}
@@ -49,12 +49,12 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/chura/OneDrive/\u0420\u0430\u0431\u043e\u0447\u0438\u0439 \u0441\u0442\u043e\u043b/OS/cmake-build-debug",
-		"source" : "C:/Users/chura/OneDrive/\u0420\u0430\u0431\u043e\u0447\u0438\u0439 \u0441\u0442\u043e\u043b/OS"
+		"build" : "/mnt/c/Users/chura/OneDrive/\u0420\u0430\u0431\u043e\u0447\u0438\u0439 \u0441\u0442\u043e\u043b/OS/cmake-build-debug-wsl",
+		"source" : "/mnt/c/Users/chura/OneDrive/\u0420\u0430\u0431\u043e\u0447\u0438\u0439 \u0441\u0442\u043e\u043b/OS"
 	},
 	"version" : 
 	{
 		"major" : 2,
-		"minor" : 7
+		"minor" : 6
 	}
 }
