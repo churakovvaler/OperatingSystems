@@ -4,55 +4,61 @@
 #include <unistd.h>
 #include <stdbool.h>
 
-pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
-pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
-bool ready = false;
+pthread_mutex_t buffer_mutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_cond_t buffer_not_full  = PTHREAD_COND_INITIALIZER;
+pthread_cond_t buffer_not_empty = PTHREAD_COND_INITIALIZER;
 
-void* provider(void* arg) {
-    int count = *(int*)arg;
-    for (int i = 0; i < count; ++i) {
+bool buffer_has_data = false;
+
+void* producer_thread(void* arg) {
+    int total_items = *(int*)arg;
+    for (int i = 0; i < total_items; ++i) {
         sleep(1);
-        pthread_mutex_lock(&lock);
-        while (ready) {
-            pthread_cond_wait(&cond, &lock);
+
+        pthread_mutex_lock(&buffer_mutex);
+
+        while (buffer_has_data) {
+            pthread_cond_wait(&buffer_not_full, &buffer_mutex);
         }
-        ready = true;
+
+        buffer_has_data = true;
         printf("provided\n");
-        pthread_cond_signal(&cond);
-        pthread_mutex_unlock(&lock);
+        pthread_cond_signal(&buffer_not_empty);
+        pthread_mutex_unlock(&buffer_mutex);
     }
     return NULL;
 }
 
-void* consumer(void* arg) {
-    int count = *(int*)arg;
-    for (int i = 0; i < count; ++i) {
-        pthread_mutex_lock(&lock);
-        while (!ready) {
-            pthread_cond_wait(&cond, &lock);
+void* consumer_thread(void* arg) {
+    int total_items = *(int*)arg;
+    for (int i = 0; i < total_items; ++i) {
+        pthread_mutex_lock(&buffer_mutex);
+
+        while (!buffer_has_data) {
+            pthread_cond_wait(&buffer_not_empty, &buffer_mutex);
         }
-        ready = false;
+
+        buffer_has_data = false;
         printf("consumed\n");
-        pthread_cond_signal(&cond);
-        pthread_mutex_unlock(&lock);
+        pthread_cond_signal(&buffer_not_full);
+        pthread_mutex_unlock(&buffer_mutex);
     }
     return NULL;
 }
 
 int main() {
-    const int N = 5;
-    pthread_t prov_thr, cons_thr;
+    const int NUM_OPERATIONS = 5;
+    pthread_t producer_tid, consumer_tid;
 
-    int count = N;
+    pthread_create(&producer_tid, NULL, producer_thread, &NUM_OPERATIONS);
+    pthread_create(&consumer_tid, NULL, consumer_thread, &NUM_OPERATIONS);
 
-    pthread_create(&prov_thr, NULL, provider, &count);
-    pthread_create(&cons_thr, NULL, consumer, &count);
+    pthread_join(producer_tid, NULL);
+    pthread_join(consumer_tid, NULL);
 
-    pthread_join(prov_thr, NULL);
-    pthread_join(cons_thr, NULL);
-
-    pthread_mutex_destroy(&lock);
-    pthread_cond_destroy(&cond);
+    pthread_mutex_destroy(&buffer_mutex);
+    pthread_cond_destroy(&buffer_not_full);
+    pthread_cond_destroy(&buffer_not_empty);
 
     return 0;
 }
